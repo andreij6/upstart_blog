@@ -1,29 +1,31 @@
-<h1>Listing blogs</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Post</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @blogs.each do |blog| %>
-      <tr>
-        <td><%= blog.title %></td>
-        <td><%= blog.post %></td>
-        <td><%= link_to 'Show', blog %></td>
-        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Blog', new_blog_path %>
+<header class="col-md-6">
+	<div class="affix">
+		<div class="col-md-7">
+			<h1>Andre's Upstart Blog</h1>
+			<p>The purpose of this blog is to give potential backers more information about me and who I am and what I plan to become.</p>
+			<%= link_to "Upstart", "https://www.upstart.com/upstarts/andre-jones--2" %><br/>
+			<%= link_to 'New Blog', new_blog_path %>
+		</div>
+	</div>
+</header>
+<p>
+	<div id="tag_cloud">
+	  <% tag_cloud Blog.tag_counts, %w[s m l] do |tag, css_class| %>
+	    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+	  <% end %>
+	</div><br />
+	
+	tweet
+</p>
+<section class="col-md-6 entries">
+	
+	<% @blogs.each do |blog| %>
+	Tags: <%= raw blog.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
+	<h2><small><%= blog.created_at.strftime("%-d %b") %></small><%= blog.title %></h2>
+	<p><%= simple_format blog.post %></p>
+	<%= link_to 'Show', blog %>
+	<%= link_to 'Edit', edit_blog_path(blog) %>
+	<%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %>
+	<hr />
+	<% end %>
+</section>

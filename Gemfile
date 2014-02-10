@@ -30,3 +30,5 @@ group :test do
   gem 'shoulda-matchers', '~> 2.4.0'
 end
 
+gem 'acts-as-taggable-on'
+
