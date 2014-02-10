@@ -20,12 +20,14 @@
 <section class="col-md-6 entries">
 	
 	<% @blogs.each do |blog| %>
-	Tags: <%= raw blog.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
+	[<%= raw blog.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>]
 	<h2><small><%= blog.created_at.strftime("%-d %b") %></small><%= blog.title %></h2>
 	<p><%= simple_format blog.post %></p>
-	<%= link_to 'Show', blog %>
-	<%= link_to 'Edit', edit_blog_path(blog) %>
-	<%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %>
+	<% if current_user %>
+		<%= link_to 'Show', blog %>
+		<%= link_to 'Edit', edit_blog_path(blog) %>
+		<%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %>
+	<% end %>
 	<hr />
 	<% end %>
 </section>
