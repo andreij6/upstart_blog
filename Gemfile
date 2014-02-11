@@ -29,6 +29,9 @@ end
 
 gem "thin"
 gem "pg"
+group :production, :staging do
+  gem 'rails_12factor'
+end
 
 
 group :test do
