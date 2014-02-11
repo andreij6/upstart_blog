@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.2'
+ruby '1.9.3'
 
-gem 'sqlite3'
 
 gem 'sass-rails', '~> 4.0.0'
 
@@ -23,6 +23,12 @@ gem 'devise'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
+  gem 'sqlite3'
+end
+
+group :production do
+  gem "thin"
+  gem "pg"
 end
 
 group :test do
