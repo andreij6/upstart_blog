@@ -1,33 +1,47 @@
-<header class="col-md-6">
+<header class="col-xs-6 heading">
 	<div class="affix">
-		<div class="col-md-7">
-			<h1>Andre's Upstart Blog</h1>
+		<div class="col-xs-4">
+			<h1>My Upstart Blog</h1>
+			<%= tweet(message).html_safe %>
+	<a href="https://twitter.com/s3nojA" class="twitter-follow-button" data-show-count="false" data-show-screen-name="true" data-lang="en">Follow @Twitter</a>
 			<p>The purpose of this blog is to give potential backers more information about me and who I am and what I plan to become.</p>
-			<%= link_to "Upstart", "https://www.upstart.com/upstarts/andre-jones--2" %><br/>
+			
+			<%= link_to "https://www.upstart.com/upstarts/andre-jones--2"  do %>
+				<%= image_tag "light-kit.png", {height: 45} %>
+			<% end %><br/>
+		<% if current_user %>
 			<%= link_to 'New Blog', new_blog_path %>
+		<% end %><br />
+		<div id="tag_cloud">
+			<b>Tags:</b>
+		  <% tag_cloud Blog.tag_counts, %w[s m l] do |tag, css_class| %>
+		    <%= link_to tag.name, tag_path(tag.name), class: css_class %> |
+		  <% end %>
 		</div>
+		</div>
+		
 	</div>
 </header>
-<p>
-	<div id="tag_cloud">
-	  <% tag_cloud Blog.tag_counts, %w[s m l] do |tag, css_class| %>
-	    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
-	  <% end %>
-	</div><br />
-	
-	tweet
-</p>
-<section class="col-md-6 entries">
+
+<section class="col-xs-6 entries">
 	
 	<% @blogs.each do |blog| %>
-	[<%= raw blog.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>]
-	<h2><small><%= blog.created_at.strftime("%-d %b") %></small><%= blog.title %></h2>
-	<p><%= simple_format blog.post %></p>
-	<% if current_user %>
-		<%= link_to 'Show', blog %>
-		<%= link_to 'Edit', edit_blog_path(blog) %>
-		<%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %>
-	<% end %>
-	<hr />
+		[<%= raw blog.tag_list.map { |t| link_to t, tag_path(t) }.join(' - ') %>]
+		<h2>
+			<small><%= blog.created_at.strftime("%-d %b") %></small>
+			<%= link_to blog  do %>
+				<%= blog.title%><small>Comment</small>
+			<% end %>
+		</h2>
+		
+		<p>
+			<%= simple_format blog.post %>
+		</p>
+		<% if current_user %>
+			<%= link_to 'Show', blog %>
+			<%= link_to 'Edit', edit_blog_path(blog) %>
+			<%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %>
+		<% end %>
+		<hr />
 	<% end %>
 </section>
