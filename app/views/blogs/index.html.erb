@@ -1,47 +1,82 @@
-<header class="col-xs-6 heading">
-	<div class="affix">
-		<div class="col-xs-4">
-			<h1>My Upstart Blog</h1>
-			<%= tweet(message).html_safe %>
-	<a href="https://twitter.com/s3nojA" class="twitter-follow-button" data-show-count="false" data-show-screen-name="true" data-lang="en">Follow @Twitter</a>
-			<p>The purpose of this blog is to give potential backers more information about me and who I am and what I plan to become.</p>
+<header class="navbar-fixed-top">
+		<div class="container tops">
+			<h1>My 
+				<%= link_to "https://www.upstart.com/upstarts/andre-jones--2"  do %>
+					<%= image_tag "light-kit.png", {height: 45} %>
+				<% end %> 
+				Blog <% if current_user %>
+					<%= link_to 'New Blog', new_blog_path, class: "btn btn-primary" %>
+				<% end %></h1>
+			<p class="pull-right">
+				
+				
+				<%= tweet(message).html_safe %>
+				<a href="https://twitter.com/s3nojA" class="twitter-follow-button" data-show-count="false" data-show-screen-name="true" data-lang="en">
+					Follow @Twitter
+				</a><br/>
+				<% if user_signed_in? %>
+				  <strong><%= current_user.email %></strong>.
+				  <%= link_to 'Edit', edit_user_registration_path %> |
+				  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+				<% end %>
+			</p>
+			<p>
+				Giving potential backers more information about who I am and what I plan to become.
+			</p>
 			
-			<%= link_to "https://www.upstart.com/upstarts/andre-jones--2"  do %>
-				<%= image_tag "light-kit.png", {height: 45} %>
-			<% end %><br/>
-		<% if current_user %>
-			<%= link_to 'New Blog', new_blog_path %>
-		<% end %><br />
-		<div id="tag_cloud">
-			<b>Tags:</b>
-		  <% tag_cloud Blog.tag_counts, %w[s m l] do |tag, css_class| %>
-		    <%= link_to tag.name, tag_path(tag.name), class: css_class %> |
-		  <% end %>
-		</div>
-		</div>
+			
 		
-	</div>
+			
+			<br />
+		</div>
 </header>
-
-<section class="col-xs-6 entries">
+<hr/>
+<section class="col-md-6 listing shadow">
 	
 	<% @blogs.each do |blog| %>
+	
 		[<%= raw blog.tag_list.map { |t| link_to t, tag_path(t) }.join(' - ') %>]
+		
 		<h2>
+			
 			<small><%= blog.created_at.strftime("%-d %b") %></small>
+			
 			<%= link_to blog  do %>
-				<%= blog.title%><small>Comment</small>
+				<%= blog.title%>
+				<small>Comment</small>
 			<% end %>
 		</h2>
 		
 		<p>
 			<%= simple_format blog.post %>
 		</p>
+		
 		<% if current_user %>
 			<%= link_to 'Show', blog %>
 			<%= link_to 'Edit', edit_blog_path(blog) %>
 			<%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %>
 		<% end %>
+		
 		<hr />
+		
 	<% end %>
 </section>
+<div id="tag_cloud" class="col-md-6 listing">
+	<ul class="nav nav-pills nav-stacked affix">
+		<% if params[:tag]%>
+			<li> <%= link_to "Home", root_path %> </li>
+			<% else %>
+			<li class="active"><%= link_to "Home", root_path %></li>
+		<% end %>
+  	<% tag_cloud Blog.tag_counts, %w[s m l] do |tag, css_class| %>
+    	<% if params[:tag] == tag.name%>
+    		
+    		<li class="active">
+    	<% else %>
+    		<li>
+    	<% end %>
+    		<%= link_to tag.name, tag_path(tag.name), class: css_class %>
+    	</li>
+  	<% end %>
+  	</ul>
+</div>

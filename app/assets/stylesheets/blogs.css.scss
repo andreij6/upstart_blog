@@ -2,32 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-header {
-  padding-top: 125px;
+p {
+  font-family: 'Duru Sans', sans-serif;
+  line-height:200%;
 }
 
-.container {
-    color: #222;
-    background: lightgrey;
-    
-    a {
-      color: #222;
-      
-      &:hover {
-        text-decoration: none;
-        background-color: white;
-      }
-      
-      &:visited {
-        color: #222;
-      }
-    }
-    
-    .entries {
-      padding-top: 75px;
-    }
-    
-    small {
-      color: #999;
-    }
+header h1 {
+  font-family: 'Over the Rainbow', cursive;
+}
+
+.title {
+  font-family: 'Russo One', sans-serif;
+  color: #444;
+}
+
+.listing h2 {
+  font-family: 'Russo One', sans-serif;
 }
