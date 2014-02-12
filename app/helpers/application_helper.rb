@@ -1,6 +1,6 @@
 module ApplicationHelper
   def message
-    "Help Andre' Get into MakerSquare and become a Web Developer http://andre-upstart.herokuapp.com/.".gsub(" ","%20")
+    "Help Andre' [@s3nojA] Get into MakerSquare and become a Web Developer http://andre-upstart.herokuapp.com/.".gsub(" ","%20")
   end
   
   def tweet(message)
