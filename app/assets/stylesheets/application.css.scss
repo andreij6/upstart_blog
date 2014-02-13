@@ -30,6 +30,7 @@ header {
   a {
     font-family: 'Duru Sans', sans-serif;
     text-decoration: none;
+    color: #00ADA8;
     
     &:hover {
       text-decoration: none;
@@ -39,6 +40,23 @@ header {
   }
   
 }
+
+.nav-pills>li.active>a.m  {
+  background: #00918C;
+}
+
+footer div {
+  -webkit-box-shadow: inset 0 20px 20px -20px rgba(0,0,0,0.8);
+  -moz-box-shadow: inset 0 20px 20px -20px rgba(0,0,0,0.8);
+  box-shadow: inset 0 20px 20px -20px rgba(0,0,0,0.8);
+  background: #333;
+  
+  h2 {
+    font-family: 'Over the Rainbow', cursive;
+    color: white;
+  }
+}
+
 
 
 

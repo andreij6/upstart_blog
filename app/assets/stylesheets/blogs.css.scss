@@ -19,3 +19,16 @@ header h1 {
 .listing h2 {
   font-family: 'Russo One', sans-serif;
 }
+
+.hideme {
+  display: none;
+}
+
+#question, #help {
+  cursor: pointer;
+}
+
+#help p {
+  font-family: 'Russo One', sans-serif;
+}
+

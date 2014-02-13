@@ -8,9 +8,6 @@
 					<%= link_to 'New Blog', new_blog_path, class: "btn btn-primary" %>
 				<% end %></h1>
 			<p class="pull-right">
-				
-				
-				<%= tweet(message).html_safe %>
 				<a href="https://twitter.com/s3nojA" class="twitter-follow-button" data-show-count="false" data-show-screen-name="true" data-lang="en">
 					Follow @Twitter
 				</a><br/>
@@ -24,14 +21,11 @@
 				Giving potential backers more information about who I am and what I plan to become.
 			</p>
 			
-			
-		
-			
 			<br />
 		</div>
 </header>
 <hr/>
-<section class="col-md-6 listing shadow">
+<section class="col-md-6 listing">
 	
 	<% @blogs.each do |blog| %>
 	
@@ -62,13 +56,30 @@
 	<% end %>
 </section>
 <div id="tag_cloud" class="col-md-6 listing">
+	<h2 id="help"> Ways you can help!</h2>
+	<div id="hbox" class="hideme">
+		<p>
+			<b>Become an upstart backer <script>mail2("andreij6","gmail",0,"","Email Me")</script> to get a free $100 to invest</b>
+			
+		</p><hr />
+		<p>
+			Share <br />
+			<%= tweet(message).html_safe %>
+			<div class="g-plusone"></div>
+		</p><hr />
+		<p> 
+			Donate Bitcoin<br />
+			<%= donate_bitcoin %>
+		</p><hr />
+	</div><br/>
+
 	<ul class="nav nav-pills nav-stacked affix">
 		<% if params[:tag]%>
 			<li> <%= link_to "Home", root_path %> </li>
 			<% else %>
-			<li class="active"><%= link_to "Home", root_path %></li>
+			<li class="active"><%= link_to "Home", root_path, class: "m"%></li>
 		<% end %>
-  	<% tag_cloud Blog.tag_counts, %w[s m l] do |tag, css_class| %>
+  	<% tag_cloud Blog.tag_counts, %w[m] do |tag, css_class| %>
     	<% if params[:tag] == tag.name%>
     		
     		<li class="active">
@@ -79,4 +90,5 @@
     	</li>
   	<% end %>
   	</ul>
+  	
 </div>
