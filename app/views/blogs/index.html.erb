@@ -36,7 +36,7 @@
 				<span class="pull-right">//TAGS: <%= raw blog.tag_list.map { |t| link_to t, tag_path(t) }.join('//') %></span>
 			</h2>
 		</div>
-		<p class="post hidden"><%= simple_format blog.post %></p>
+		<div class="post hidden"><%= simple_format blog.post %></div>
 		<% if current_user %>
 			<%= link_to 'Show', blog %>
 			<%= link_to 'Edit', edit_blog_path(blog) %>
