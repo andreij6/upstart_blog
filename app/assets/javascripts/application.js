@@ -15,10 +15,8 @@
 //= require_tree .
 
 $(document).ready(function(){
-	$("#question").click(function(){
-		$("#qbox").toggleClass("hideme");
-	});
-	$("#help").click(function(){
-		$("#hbox").toggleClass("hideme");
+	$(".blog_title").click(function(){
+		$(this).next(".post").toggleClass("hidden");
+		$("#disqus_thread").removeClass("hidden");
 	});
 });

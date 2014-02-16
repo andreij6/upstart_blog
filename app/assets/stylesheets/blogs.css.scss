@@ -7,8 +7,14 @@ p {
   line-height:200%;
 }
 
-header h1 {
-  font-family: 'Over the Rainbow', cursive;
+header {
+  background: white;
+  margin: 45px 0px 50px 0px;
+  opacity:0.8;
+  
+  h1 {
+    font-family: 'Over the Rainbow', cursive;
+  }
 }
 
 .title {
@@ -16,19 +22,31 @@ header h1 {
   color: #444;
 }
 
-.listing h2 {
+.listing {
+  h2 {
   font-family: 'Russo One', sans-serif;
+  
+    span {
+      font-size: small;
+        a {
+        color: #333;
+        font-size: small;
+      } 
+    } 
+  }
 }
 
-.hideme {
+.blog_title:hover {
+  background: lightgrey;
+  cursor: pointer;
+  
+  h2 {
+    color: #00ADA8;
+  }
+}
+
+.hidden {
   display: none;
 }
 
-#question, #help {
-  cursor: pointer;
-}
-
-#help p {
-  font-family: 'Russo One', sans-serif;
-}
 

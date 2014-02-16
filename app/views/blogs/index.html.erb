@@ -17,34 +17,26 @@
 				  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
 				<% end %>
 			</p>
-			<p>
-				Giving potential backers more information about who I am and what I plan to become.
-			</p>
 			
 			<br />
+			
 		</div>
 </header>
 <hr/>
-<section class="col-md-6 listing">
+<div class="row">
+<section class="col-md-8 listing">
 	
 	<% @blogs.each do |blog| %>
-	
-		[<%= raw blog.tag_list.map { |t| link_to t, tag_path(t) }.join(' - ') %>]
-		
-		<h2>
-			
-			<small><%= blog.created_at.strftime("%-d %b") %></small>
-			
-			<%= link_to blog  do %>
-				<%= blog.title%>
-				<small>Comment</small>
-			<% end %>
-		</h2>
-		
-		<p>
-			<%= simple_format blog.post %>
-		</p>
-		
+		<div id="<%= dom_id(blog) %>"class="blog_title">
+			<h2 class="title">
+				
+				<small><%= blog.created_at.strftime("%-d %b") %></small>
+				
+					<%= blog.title%>
+				<span class="pull-right">//TAGS: <%= raw blog.tag_list.map { |t| link_to t, tag_path(t) }.join(' ') %></span>
+			</h2>
+		</div>
+		<p class="post hidden"><%= blog.post %></p>
 		<% if current_user %>
 			<%= link_to 'Show', blog %>
 			<%= link_to 'Edit', edit_blog_path(blog) %>
@@ -54,10 +46,27 @@
 		<hr />
 		
 	<% end %>
+	<section>
+	
+	 <div id="disqus_thread" class="hidden"></div>
+	    <script type="text/javascript">
+	        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	        var disqus_shortname = 'myupstartblog'; // required: replace example with your forum shortname
+	
+	        /* * * DON'T EDIT BELOW THIS LINE * * */
+	        (function() {
+	            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	        })();
+	    </script>
+	    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </section>
-<div id="tag_cloud" class="col-md-6 listing">
-	<h2 id="help"> Ways you can help!</h2>
-	<div id="hbox" class="hideme">
+</section>
+<div class="col-md-4 listing">
+	<h2> Ways you can help!</h2>
+	<div>
 		<p>
 			<b>Become an Upstart backer <script>mail2("andreij6","gmail",0,"","Email Me")</script> to get a free $100 to invest</b>
 			
@@ -73,22 +82,8 @@
 		</p><hr />
 	</div><br/>
 
-	<ul class="nav nav-pills nav-stacked affix">
-		<% if params[:tag]%>
-			<li> <%= link_to "Home", root_path %> </li>
-			<% else %>
-			<li class="active"><%= link_to "Home", root_path, class: "m"%></li>
-		<% end %>
-  	<% tag_cloud Blog.tag_counts, %w[m] do |tag, css_class| %>
-    	<% if params[:tag] == tag.name%>
-    		
-    		<li class="active">
-    	<% else %>
-    		<li>
-    	<% end %>
-    		<%= link_to tag.name, tag_path(tag.name), class: css_class %>
-    	</li>
-  	<% end %>
-  	</ul>
+	
   	
+</div>
+
 </div>

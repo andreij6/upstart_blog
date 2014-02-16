@@ -10,15 +10,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	
 	<div class="container">
 		<%= yield %>
 	</div>
-	<footer>
-		<div class="container">
-			<h2 class="pull-right">Thankyou</h2>
-			
-		</div>
-	</footer>
+	
 	<script>
 		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 	</script>
