@@ -10,10 +10,34 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	
-	<div class="container">
+	<header class="navbar-fixed-top">
+		<section class="container tops">
+			<h1>My 
+				<%= link_to "https://www.upstart.com/upstarts/andre-jones--2"  do %>
+					<%= image_tag "light-kit.png", {height: 45} %>
+				<% end %> 
+				Blog <% if current_user %>
+					<%= link_to 'New Blog', new_blog_path, class: "btn btn-primary" %>
+				<% end %></h1>
+			<span class="pull-right">
+				<a href="https://twitter.com/s3nojA" class="twitter-follow-button" data-show-count="false" data-show-screen-name="true" data-lang="en">
+					Follow @Twitter
+				</a><br/>
+				<% if user_signed_in? %>
+				  <b><%= current_user.email %></b>.
+				  <%= link_to 'Edit', edit_user_registration_path %> |
+				  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+				<% end %>
+			</span>
+			
+			<br />
+			
+		</section>
+	</header>
+	<section class="container">
+		
 		<%= yield %>
-	</div>
+	</section>
 	
 	<script>
 		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

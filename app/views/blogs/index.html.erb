@@ -1,89 +1,46 @@
-<header class="navbar-fixed-top">
-		<div class="container tops">
-			<h1>My 
-				<%= link_to "https://www.upstart.com/upstarts/andre-jones--2"  do %>
-					<%= image_tag "light-kit.png", {height: 45} %>
-				<% end %> 
-				Blog <% if current_user %>
-					<%= link_to 'New Blog', new_blog_path, class: "btn btn-primary" %>
-				<% end %></h1>
-			<p class="pull-right">
-				<a href="https://twitter.com/s3nojA" class="twitter-follow-button" data-show-count="false" data-show-screen-name="true" data-lang="en">
-					Follow @Twitter
-				</a><br/>
-				<% if user_signed_in? %>
-				  <strong><%= current_user.email %></strong>.
-				  <%= link_to 'Edit', edit_user_registration_path %> |
-				  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+<section>
+		<article class="col-md-7 listing">
+				<header id="<%= dom_id(@last) %>"class="blog_title">
+					<h2 class="title">
+						
+						<span><%= @last.created_at.strftime("%-d %b") %></span>
+						
+							<%= @last.title%>
+						<!--<span class="pull-right">//TAGS: <%= raw @last.tag_list.map { |t| link_to t, tag_path(t) }.join('//') %></span>-->
+					</h2>
+				</header>
+				<p><%= simple_format @last.post %></p>
+				<% if current_user %>
+					<%= link_to 'Show', @last %>
+					<%= link_to 'Edit', edit_blog_path(@last) %>
+					<%= link_to 'Destroy', @last, method: :delete, data: { confirm: 'Are you sure?' } %>
 				<% end %>
-			</p>
-			
-			<br />
-			
-		</div>
-</header>
-<hr/>
-<div class="row">
-<section class="col-md-8 listing">
-	
-	<% @blogs.each do |blog| %>
-		<div id="<%= dom_id(blog) %>"class="blog_title">
-			<h2 class="title">
 				
-				<small><%= blog.created_at.strftime("%-d %b") %></small>
-				
-					<%= blog.title%>
-				<span class="pull-right">//TAGS: <%= raw blog.tag_list.map { |t| link_to t, tag_path(t) }.join('//') %></span>
-			</h2>
-		</div>
-		<div class="post hidden"><%= simple_format blog.post %></div>
-		<% if current_user %>
-			<%= link_to 'Show', blog %>
-			<%= link_to 'Edit', edit_blog_path(blog) %>
-			<%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %>
-		<% end %>
-		
-		<hr />
-		
-	<% end %>
-	<section>
-	
-	 <div id="disqus_thread" class="hidden"></div>
-	    <script type="text/javascript">
-	        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-	        var disqus_shortname = 'myupstartblog'; // required: replace example with your forum shortname
-	
-	        /* * * DON'T EDIT BELOW THIS LINE * * */
-	        (function() {
-	            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-	            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-	            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	        })();
-	    </script>
-	    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-	    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</section>
-</section>
-<div class="col-md-4 listing">
-	<h2> Ways you can help!</h2>
-	<div>
-		<p>
-			<b>Become an Upstart backer <script>mail2("andreij6","gmail",0,"","Email Me")</script> to get a free $100 to invest</b>
 			
-		</p><hr />
-		<p>
-			Share <br />
-			<%= tweet(message).html_safe %>
-			<div class="g-plusone"></div>
-		</p><hr />
-		<p> 
-			Donate Bitcoin<br />
-			<%= donate_bitcoin %>
-		</p><hr />
-	</div><br/>
-
-	
-  	
-</div>
-
-</div>
+		</article>
+</section>
+<section>
+		<aside class="col-md-4 col-md-push-1 listing">
+			<h2>Previous Posts</h2>
+			<% @blogs.each do |blog| %>
+				<% unless blog.title == @last.title %>
+					<p><%= link_to blog.title, blog %></p>
+				<% end %>
+			<% end %>
+			<h2> Ways you can help!</h2>
+			<section>
+				<p>
+					<b>Become an Upstart backer <script>mail2("andreij6","gmail",0,"","Email Me")</script> to get a free $100 to invest</b>
+					
+				</p><hr />
+				<p>
+					Share <br />
+					<%= tweet(message).html_safe %>
+					<div class="g-plusone"></div>
+				</p><hr />
+			</section><br/>
+		
+			
+		  	
+		</aside>
+</section>

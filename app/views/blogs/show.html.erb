@@ -1,22 +1,17 @@
-
-	<hr /><br /><hr />
-
 <p id="notice"><%= notice %></p>
-<section class="col-md-6">
+<section class="col-md-7 listing">
 	
 <p>
-  <strong>Title:</strong>
   <h1 class="title"><%= @blog.title %></h1>
 </p>
 
 <p>
-  <strong>Blog Post:</strong><br />
   <%= simple_format @blog.post %>
 </p>
 
 <h4><%= link_to 'Back', blogs_path %></h4>
 </section>
-<section class="col-md-6">
+<section class="col-md-4 col-md-push-1 listing">
 	<h3><%= link_to 'Back', blogs_path %></h3>
  <div id="disqus_thread"></div>
     <script type="text/javascript">

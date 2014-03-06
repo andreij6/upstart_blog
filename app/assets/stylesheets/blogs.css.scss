@@ -9,8 +9,16 @@ p {
 
 header {
   background: white;
-  margin: 45px 0px 50px 0px;
-  opacity:0.8;
+  //margin: 45px 0px 50px 0px;
+  opacity:0.9;
+  -webkit-box-shadow: 0 8px 6px -6px #999;
+     -moz-box-shadow: 0 8px 6px -6px #999;
+          box-shadow: 0 8px 6px -6px #999;
+  
+  &:hover {
+    background: #00ADA8;
+    opacity: 1;
+  }
   
   h1 {
     font-family: 'Over the Rainbow', cursive;
@@ -23,6 +31,9 @@ header {
 }
 
 .listing {
+  background: white;
+  border: 5px dashed lightgrey;
+  
   h2 {
   font-family: 'Russo One', sans-serif;
   
@@ -43,10 +54,6 @@ header {
   h2 {
     color: #00ADA8;
   }
-}
-
-.hidden {
-    display: none;
 }
 
 

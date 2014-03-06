@@ -8,6 +8,7 @@ class BlogsController < ApplicationController
     if params[:tag]
       @blogs = Blog.tagged_with(params[:tag])
     else
+      @last = Blog.last
       @blogs = Blog.all.order( 'created_at DESC' )
     end
   end
